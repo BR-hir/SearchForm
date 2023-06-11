@@ -10,7 +10,7 @@ describe('Input compornent',()=>{
   })
 
   it('The word "add text" is visible', async () => {
-    expect(screen.getByText('add text')).toBeInTheDocument()
+    expect(screen.getByText('Player Name')).toBeInTheDocument()
   })
 
   it('Input element are visible', () => {

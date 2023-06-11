@@ -15,7 +15,7 @@ describe('Drop down compornent',()=>{
   })
 
   it('The word "select category" is visible', async () => {
-    expect(screen.getByText('select category')).toBeInTheDocument()
+    expect(screen.getByText('Players List')).toBeInTheDocument()
   })
 
   it('Input element are visible', () => {

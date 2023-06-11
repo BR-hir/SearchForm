@@ -10,7 +10,7 @@ describe('Number Input',()=>{
   })
 
   it('The word "add NumberText" is visible', async () => {
-    expect(screen.getByText('add number text')).toBeInTheDocument()
+    expect(screen.getByText('Registration Number')).toBeInTheDocument()
   })
 
   it('NumberInput element are visible', () => {

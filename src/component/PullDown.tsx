@@ -20,7 +20,7 @@ export default function PullDown(){
 
   return (
     <div className={styles.pullDownContainer}>
-      <label>select category</label>
+      <label>Players List</label>
       <Select className={styles.selectForm} options={options} />
     </div>
   )

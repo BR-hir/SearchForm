@@ -1,8 +1,8 @@
+import { readRacerInfo } from '../json/reader'
 import { Player } from '../models/Player'
-import boatracerjson from '../json/boatracer-info.json'
 
 export const fetchPlayerInfo = () => {
-  const json = boatracerjson
+  const json = readRacerInfo()
   const player: Player[] = json.data?.map((c: Player) => {
     return {
       id: c.id,

@@ -17,6 +17,42 @@
       "memberId": "3941",
       "name": "Koji Ikeda/池田 浩二",
       "birthplace": "Aichi"
+    },
+    {
+      "id": 4,
+      "memberId": "4371",
+      "name": "Takahiro Nishiyama/西山 貴浩",
+      "birthplace": "Fukuoka"
+    },
+    {
+      "id": 5,
+      "memberId": "3415",
+      "name": "Shigeru Matsui/松井 繁",
+      "birthplace": "Osaka"
+    },
+    {
+      "id": 6,
+      "memberId": "4831",
+      "name": "Naoya Hano/羽野 直也",
+      "birthplace": "Fukuoka"
+    },
+    {
+      "id": 7,
+      "memberId": "4444",
+      "name": "Junpei Kiryu/桐生 順平",
+      "birthplace": "Saitama"
+    },
+    {
+      "id": 8,
+      "memberId": "4238",
+      "name": "Makoto Busujima/毒島 誠",
+      "birthplace": "Gunma"
+    },
+    {
+      "id": 9,
+      "memberId": "3590",
+      "name": "Kengo Hamanoya/濱野谷 憲吾",
+      "birthplace": "Tokyo"
     }
   ]
 }

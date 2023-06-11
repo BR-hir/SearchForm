@@ -6,7 +6,7 @@ export function App() {
 
   return (
     <>
-      <h1>Form</h1>
+      <h1>Fun To BOAT RACER</h1>
       <Input />
       <NumberInput />
       <PullDown />

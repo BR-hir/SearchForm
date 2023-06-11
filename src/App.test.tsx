@@ -19,7 +19,7 @@ describe('App compornent',()=>{
 
     // THEN
     expect(screen.getByRole('heading',{level:1}))
-    expect(screen.getByText('Form')).toBeInTheDocument()
+    expect(screen.getByText('Fun To BOAT RACER')).toBeInTheDocument()
   })
 
 })
