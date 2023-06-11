@@ -1,0 +1,9 @@
+@use '../variables.module.scss' as *;
+
+.pullDownContainer{
+  display: flex;
+  justify-content: space-between;
+}
+.selectForm{
+    @include primari-input-column;
+}

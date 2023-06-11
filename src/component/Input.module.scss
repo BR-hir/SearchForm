@@ -1,0 +1,12 @@
+@use '../variables.module.scss' as *;
+
+.inputContainer{
+ display: flex;
+ justify-content: space-between;
+}
+
+.textInput{
+ @include primari-input-column;
+ padding: 0;
+ margin: 0;
+}

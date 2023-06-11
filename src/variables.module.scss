@@ -1,0 +1,237 @@
+$natural-grey-0: #ffffff;
+$natural-grey-50: #eeeeee;
+$natural-grey-100: #bebebe;
+$natural-grey-200: #a9a9a9;
+$natural-grey-300: #8c8c8c;
+$natural-grey-400: #666666;
+$natural-grey-500: #333333;
+$natural-grey-600: #475569;
+$primary-green-50: #e1faf0;
+$primary-green-200: #78d0b5;
+$primary-green-300: #46ba98;
+$primary-green-400: #0daa84;
+$secondary-blue-50: #eff6ff;
+$secondary-blue-100: #86b4ff;
+$secondary-blue-200: #4a8fff;
+$secondary-blue-300: #3b82f6;
+$secondary-red-50: #fef2f2;
+$secondary-red-100: #ff8989;
+$secondary-red-200: #ff5656;
+$secondary-red-300: #ef4444;
+$secondary-yellow-50: #fef7df;
+$secondary-yellow-300: #fcd34d;
+
+$noto-sans-jp: 'Noto Sans JP', sans-serif;
+
+@mixin _paragraph-01 {
+  font-family: $noto-sans-jp;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 19px;
+}
+
+@mixin paragraph-01-regular {
+  @include _paragraph-01;
+  font-weight: 400;
+}
+
+@mixin paragraph-01-bold {
+  @include _paragraph-01;
+  font-weight: 700;
+}
+
+@mixin heading-01-bold {
+  font-size: 20px;
+  font-family: $noto-sans-jp;
+  color: $natural-grey-400;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: -4%;
+  text-decoration: none;
+}
+
+@mixin heading-02-regular {
+  font-size: 16px;
+  font-family: $noto-sans-jp;
+  color: $natural-grey-500;
+  line-height: 24px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: -0.04em;
+}
+
+@mixin heading-02-bold {
+  font-size: 16px;
+  font-family: $noto-sans-jp;
+  color: $natural-grey-400;
+  line-height: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@mixin _heading-03 {
+  font-size: 14px;
+  font-family: $noto-sans-jp;
+  color: $natural-grey-400;
+  line-height: 1.5;
+}
+
+@mixin heading-03-regular {
+  @include _heading-03;
+  font-weight: 400;
+}
+
+@mixin heading-03-bold {
+  @include _heading-03;
+  font-weight: 700;
+}
+
+@mixin display-01-bold {
+  font-family: $noto-sans-jp;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 58px;
+}
+
+@mixin display-02-bold {
+  font-family: $noto-sans-jp;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+@mixin _caption {
+  font-family: $noto-sans-jp;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@mixin caption-light {
+  @include _caption;
+  font-weight: 300;
+}
+
+@mixin caption-regular {
+  @include _caption;
+  font-weight: 400;
+}
+
+@mixin caption-bold {
+  @include _caption;
+  font-weight: 700;
+}
+
+@mixin text-link {
+  color: $primary-green-400;
+  text-decoration-style: dashed;
+  text-underline-offset: 0.3em;
+
+  &:hover {
+    color: $primary-green-200;
+    text-decoration: none;
+  }
+}
+
+@mixin shadow-md {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.06),
+  0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@mixin textfield {
+  outline-color: $primary-green-200;
+  border: 1px solid $natural-grey-50;
+  border-radius: 8px;
+  padding: 10px;
+  @include paragraph-01-regular;
+
+  &::placeholder {
+    color: $natural-grey-100;
+    @include paragraph-01-regular;
+  }
+}
+
+@mixin shadow-def {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-md {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.06),
+  0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.05),
+  0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-xl {
+  box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.04),
+  0px 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-xxl {
+  box-shadow: 0px 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+@mixin popup-text-only {
+  background-color: $natural-grey-0;
+  border-radius: 8px;
+  padding: 60px 40px;
+  border: 1px solid $natural-grey-100;
+  @include shadow-xl;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@mixin card {
+  background-color: $natural-grey-0;
+  padding: 16px;
+  border-radius: 5px;
+  @include shadow-def;
+}
+
+@mixin link-bg-white {
+  @include paragraph-01-regular;
+  color: $primary-green-400;
+  border-bottom: 1px dashed $primary-green-400;
+  &:hover {
+    color: $primary-green-200;
+    border-bottom: 0px;
+  }
+}
+
+@mixin primary-button {
+  background-color: $primary-green-400;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  color: $natural-grey-0;
+  @include caption-bold;
+  cursor: pointer;
+  width: fit-content;
+
+  &:hover {
+    background-color: $primary-green-200;
+  }
+
+  &:disabled {
+    background-color: $natural-grey-100;
+    color: $natural-grey-300;
+    cursor: auto;
+  }
+}
+
+@mixin primari-input-column{
+  width: 200px;
+  height: 38px;
+}
