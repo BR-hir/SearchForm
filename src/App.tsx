@@ -1,16 +1,14 @@
-import PullDown from './component/PullDown'
-import NumberInput from './component/NumberInput'
-import Input from './component/Input'
+import { Route, Routes } from 'react-router-dom'
+import { ResearchView } from './ResearchView'
+import { TopView } from './TopView'
 
 export function App() {
 
   return (
-    <>
-      <h1>Fun To BOAT RACER</h1>
-      <Input />
-      <NumberInput />
-      <PullDown />
-    </>
+    <Routes>
+      <Route path={'/'} element={<TopView />}></Route>
+      <Route path={'/search'} element={<ResearchView />}></Route>
+    </Routes>
 
     )
 }
