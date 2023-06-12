@@ -1,16 +1,17 @@
 import PullDown from './component/PullDown'
 import NumberInput from './component/NumberInput'
 import Input from './component/Input'
+import Header from './component/Header'
 
 export function ResearchView() {
 
   return (
-    <>
-      <h1>Fun To BOAT RACER</h1>
+    <div data-testid='searchPage'>
+      <Header />
       <Input />
       <NumberInput />
       <PullDown />
-    </>
+    </div>
 
   )
 }

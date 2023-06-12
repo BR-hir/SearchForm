@@ -2,24 +2,37 @@ import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils'
 import '@testing-library/jest-dom'
 import {App} from './App'
+import { MemoryRouter } from 'react-router-dom';
 
-const renderApplication=async ()=>{
+const renderApplication=async (url:string)=>{
 
   await act(async ()=>{
     render(
+      <MemoryRouter initialEntries={[url]}>
         <App />
+      </MemoryRouter>,
     )
   })
 }
 
-describe('App compornent',()=>{
-  xit('Appの文字が見える', () => {
-    // WHEN
-    renderApplication()
+describe('App Routing',()=>{
+  it('TopView is displayed when / is accessed.', async () => {
+    // when
+    await renderApplication('/');
 
-    // THEN
-    expect(screen.getByRole('heading',{level:1}))
-    expect(screen.getByText('Fun To BOAT RACER')).toBeInTheDocument()
-  })
+    // given
+    expect(
+      screen.getByTestId('topViewPage')
+    ).toBeInTheDocument();
+  });
 
+  it('ResearchView is displayed when /search is accessed.', async () => {
+    // when
+    await renderApplication('/search');
+
+    // given
+    expect(
+      screen.getByTestId('searchPage')
+    ).toBeInTheDocument();
+  });
 })
