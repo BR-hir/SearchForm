@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import Header from './Header'
+import '@testing-library/jest-dom'
 
 describe('Header',()=>{
   beforeEach(()=>{
@@ -8,6 +9,6 @@ describe('Header',()=>{
     )
   })
   it('The text of the Fun To BoarRace is visible.', () => {
-    expect(screen.getByText('Fun To BoarRace')).toBeInTheDocument()
+    expect(screen.getByText('Fun To BoatRace')).toBeInTheDocument()
   })
 })
