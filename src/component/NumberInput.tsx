@@ -1,10 +1,18 @@
+import Input from './Input'
 import styles from './NumberInput.module.scss';
 
-export default function NumberInput(){
+type Props = {
+  type:string
+  placeholder:string
+  labelText:string
+}
+
+export default function NumberInput(props:Props){
+  const { type,placeholder,labelText }= props
   return(
     <div className={styles.numberInputContainer}>
-      <label>Registration Number</label>
-      <input type='number' placeholder='Please input NumberText' />
+      <label>{labelText}</label>
+      <Input type={type} placeholder={placeholder}/>
     </div>
   )
 }

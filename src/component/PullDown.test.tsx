@@ -1,42 +1,38 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { act } from 'react-dom/test-utils'
+import '@testing-library/jest-dom'
+import { render, screen, waitFor } from '@testing-library/react'
+import * as playerRepository from '../repository/PlayerRepository'
 import PlayerDouble from '../testDouble/PlayerDouble'
 import PullDown from './PullDown'
-import '@testing-library/jest-dom'
-import * as playerRepository from '../repository/PlayerRepository'
 
 jest.mock('../repository/PlayerRepository')
 
 describe('Drop down compornent',()=>{
   beforeEach(()=>{
-
+  jest.spyOn(playerRepository, 'fetchPlayerInfo').mockReturnValue(PlayerDouble)
     render(
-      <PullDown />
+      <PullDown type='text' id='keywords'/>
     )
   })
 
   it('The word "select category" is visible', async () => {
+    // then
     expect(screen.getByText('Players List')).toBeInTheDocument()
   })
 
   it('Input elements containing datalist are visible.', () => {
-    expect(screen.getByTestId('textInput')).toBeInTheDocument();
+    // then
+    expect(screen.getByTestId('listInput')).toBeInTheDocument();
   })
 
-  xit('Clicking on the input element allows you to enter text and sort it.', async () => {
-    // given
-    jest.spyOn(playerRepository, 'fetchPlayerInfo').mockReturnValue(PlayerDouble)
-    const inputElement = screen.getByTestId('textInput');
-
-    // when
-
-    await act(async () => {
-      userEvent.type(inputElement, 'taro');
-    });
-
+  it('render to see the name.', async () => {
     // then
-    expect(screen.getByText('hoge taro/保下 太郎')).toBeInTheDocument()
+    await waitFor(() =>expect(screen.getByTestId('hoge taro/保下 太郎')).toBeInTheDocument())
+    await waitFor(() =>expect(screen.getByTestId('hoge jiro/保下 二郎')).toBeInTheDocument())
+  })
+
+  it('The keywords character must be assigned to the id in the datalist element', async () => {
+    // then
+    expect(screen.getByTestId('datalist')).toHaveProperty('id','keywords')
   })
 
   it('call playerRepository fetchPlayerInfo', () => {

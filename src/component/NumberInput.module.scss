@@ -1,6 +1,8 @@
+@import "src/styles/_mixin.scss";
 
 .numberInputContainer{
   display: flex;
   justify-content: space-between;
   width: 100%;
+  @include elementStyle
 }

@@ -1,8 +1,10 @@
 @use '../variables.module.scss' as *;
+@import "src/styles/_mixin.scss";
 
 .pullDownContainer{
   display: flex;
   justify-content: space-between;
+  @include elementStyle;
 }
 .selectForm{
     @include primari-input-column;

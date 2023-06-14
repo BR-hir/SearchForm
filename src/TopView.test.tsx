@@ -1,7 +1,6 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { TopView } from './TopView'
 import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+import { TopView } from './TopView'
 
 
 const mockNavigateSpy = jest.fn();
@@ -17,21 +16,9 @@ describe('TopView',()=>{
     )
   })
 
-  it('I can see the research button.', () => {
+  it('HEADER must be displayed.', () => {
     // then
-    expect(screen.getByRole('button',{name:'search'})).toBeInTheDocument()
+    expect(screen.getByTestId('header')).toBeInTheDocument()
   })
 
-  it('Pless button jump to /search .', () => {
-    // given
-    const jumpButton = screen.getByRole('button',{name:'search'})
-
-    //
-    userEvent.click(jumpButton)
-
-    // then
-    expect(mockNavigateSpy).toHaveBeenCalledWith(
-      '/search'
-    )
-  })
 })

@@ -1,12 +1,13 @@
 @use '../variables.module.scss' as *;
+@import "src/styles/_mixin.scss";
 
 .inputContainer{
  display: flex;
  justify-content: space-between;
+ @include elementStyle
 }
 
 .textInput{
  @include primari-input-column;
- padding: 0;
- margin: 0;
 }
+

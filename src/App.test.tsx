@@ -26,7 +26,7 @@ describe('App Routing',()=>{
     ).toBeInTheDocument();
   });
 
-  it('ResearchView is displayed when /search is accessed.', async () => {
+  it('SearchView is displayed when /search is accessed.', async () => {
     // when
     await renderApplication('/search');
 

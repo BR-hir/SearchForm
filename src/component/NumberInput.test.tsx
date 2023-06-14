@@ -5,20 +5,19 @@ import NumberInput from './NumberInput'
 describe('Number Input',()=>{
   beforeEach(()=>{
     render(
-      <NumberInput />
+      <NumberInput type='number' placeholder='testPlacehplder' labelText='testLabelText'/>
     )
   })
 
-  it('The word "add NumberText" is visible', async () => {
-    expect(screen.getByText('Registration Number')).toBeInTheDocument()
+  it('should the word "testLabelText" is visible', async () => {
+    expect(screen.getByText('testLabelText')).toBeInTheDocument()
   })
 
   it('NumberInput element are visible', () => {
-    expect(screen.getByPlaceholderText('Please input NumberText')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('testPlacehplder')).toBeInTheDocument();
   })
 
-
   it('The input element can only contain numbers.', () => {
-    expect(screen.getByPlaceholderText('Please input NumberText')).toHaveProperty('type','number');
+    expect(screen.getByPlaceholderText('testPlacehplder')).toHaveProperty('type','number');
   })
 })
