@@ -23,7 +23,7 @@ export default function PullDown(props:Props){
   })
 
   return (
-    <div className={styles.pullDownContainer}>
+    <div data-testid='pullDownList' className={styles.pullDownContainer}>
       <label>Players List</label>
       <input data-testid='listInput' type={type} list={list} />
         <datalist data-testid='datalist' id={id} >

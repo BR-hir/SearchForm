@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 import NumberInput from './NumberInput'
 
 describe('Number Input',()=>{
   beforeEach(()=>{
     render(
-      <NumberInput type='number' placeholder='testPlacehplder' labelText='testLabelText'/>
+      <NumberInput  placeholder='testPlacehplder' labelText='testLabelText' decimalPoint={2} />
     )
   })
 
@@ -13,11 +14,31 @@ describe('Number Input',()=>{
     expect(screen.getByText('testLabelText')).toBeInTheDocument()
   })
 
-  it('NumberInput element are visible', () => {
-    expect(screen.getByPlaceholderText('testPlacehplder')).toBeInTheDocument();
+  it('Only numbers can be entered for input elements.', () => {
+    expect(screen.getByPlaceholderText('testPlacehplder')).toHaveProperty('type','number');
   })
 
-  it('The input element can only contain numbers.', () => {
-    expect(screen.getByPlaceholderText('testPlacehplder')).toHaveProperty('type','number');
+  xit('A specified number of digits can be displayed after the decimal point',async () => {
+    // given
+    const inputElement = screen.getByPlaceholderText('testPlacehplder')
+
+    // when
+    userEvent.type(inputElement, '12.111111')
+
+    // then
+    expect(inputElement).toHaveValue('12.1')
+  })
+
+  it('Input is fill in zero',async () => {
+    // given
+    const inputElement = screen.getByPlaceholderText('testPlacehplder')
+
+    // when
+    userEvent.type(inputElement, '12')
+    console.log(inputElement)
+    userEvent.tab()
+
+    // then
+    expect(inputElement).toHaveValue('12.0')
   })
 })
