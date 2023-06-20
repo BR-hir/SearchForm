@@ -15,4 +15,5 @@ const PlayerDouble: Player[] = [
   },
 ]
 
+
 export default PlayerDouble

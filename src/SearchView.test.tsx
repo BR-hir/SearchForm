@@ -14,18 +14,20 @@ describe('SearchView',()=>{
       <SearchView />
     )
   })
+
   it('should see header text',()=> {
     expect(screen.getByText('Fun To BoatRace')).toBeInTheDocument()
   })
 
-  it('should see the inputElement,numberElement,pullDownlist',()=>{
-    const inputCount = screen.getAllByTestId('inputElement')
+  it('should see the inputElement',()=>{
+    expect(screen.getByTestId('inputElement')).toBeInTheDocument();
+  })
 
-    expect(inputCount.length).toBe(2);
+  it('should see the numberElement',()=>{
+    expect(screen.getByTestId('numberInputElement')).toBeInTheDocument();
   })
 
   it('should see the pullDownList',()=>{
     expect(screen.getByTestId('pullDownList')).toBeInTheDocument();
   })
-
 })

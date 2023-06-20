@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
-import * as playerRepository from '../repository/PlayerRepository'
 import PlayerDouble from '../testDouble/PlayerDouble'
 import PullDown from './PullDown'
 
@@ -8,9 +7,8 @@ jest.mock('../repository/PlayerRepository')
 
 describe('Drop down compornent',()=>{
   beforeEach(()=>{
-  jest.spyOn(playerRepository, 'fetchPlayerInfo').mockReturnValue(PlayerDouble)
     render(
-      <PullDown type='text' id='keywords'/>
+      <PullDown type='text' tagName='testTagName' items={PlayerDouble}/>
     )
   })
 
@@ -32,12 +30,7 @@ describe('Drop down compornent',()=>{
 
   it('The keywords character must be assigned to the id in the datalist element', async () => {
     // then
-    expect(screen.getByTestId('datalist')).toHaveProperty('id','keywords')
+    expect(screen.getByTestId('datalist')).toHaveProperty('id','testTagName')
   })
 
-  it('call playerRepository fetchPlayerInfo', () => {
-    const test = jest.spyOn(playerRepository, 'fetchPlayerInfo').mockReturnValue(PlayerDouble)
-    expect(test).toHaveBeenCalled()
-    jest.restoreAllMocks()
-  })
 })

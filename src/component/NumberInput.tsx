@@ -7,35 +7,45 @@ type Props = {
   decimalPoint:number
 }
 
-export default function NumberInput(props:Props){
+function NumberInput(props:Props){
   const { placeholder,labelText, decimalPoint }= props
   const [noValue,setNoValue] = useState('')
 
   const fixedNumber=( value:string )=>{
     let numbers = String(value).split('.');
-    const test = (numbers[1] ? numbers[1].length : 0)
-    if (test <= decimalPoint){
+    const digitNumber = (numbers[1] ? numbers[1].length : 0)
+    if (digitNumber <= decimalPoint){
       setNoValue(value)
     }
   }
 
-  const fill = () => {
+  const fillNumber = () => {
     let numbers = String(noValue).split('.');
-    const test = (numbers[1] ? numbers[1].length : 0)
-    if (test < decimalPoint){
+    const digitNumber = (numbers[1] ? numbers[1].length : 0)
+    if (digitNumber < decimalPoint){
       setNoValue(Number(noValue).toFixed(decimalPoint))
+    }
+    if (!digitNumber){
+      setNoValue('')
     }
   }
 
   return(
-    <div className={styles.numberInputContainer}>
+    <div data-testid='numberInputElement' className={styles.numberInputContainer}>
       <label>{labelText}</label>
       <input type='number' placeholder={placeholder} value={noValue} onChange={(e)=>{
         fixedNumber(e.target.value)
       }
       } onBlur={()=>{
-        fill()
+        fillNumber()
       }}/>
     </div>
   )
 }
+
+NumberInput.defaultProps = {
+  type:'text',
+  placeholder: '回答を入力'
+}
+
+export default NumberInput;

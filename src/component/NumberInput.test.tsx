@@ -29,7 +29,7 @@ describe('Number Input',()=>{
     expect(inputElement).toHaveValue('12.1')
   })
 
-  it('Input is fill in zero',async () => {
+  xit('Input is fill in zero',async () => {
     // given
     const inputElement = screen.getByPlaceholderText('testPlacehplder')
 

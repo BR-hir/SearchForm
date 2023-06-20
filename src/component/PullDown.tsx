@@ -1,32 +1,24 @@
-import { useEffect, useState } from 'react'
 import { Player } from '../models/Player'
-import * as playerRepository from '../repository/PlayerRepository'
 import styles from './PullDown.module.scss';
 
 type Props = {
-  id?:string
+  tagName?:string
   type:string
-  list?:string
+  items:Player[]
 }
 
 export default function PullDown(props:Props){
-  const {id,type,list} = props
+  const {tagName,type,items} = props
 
-  const [playerInfo,setPlayerInfo] = useState<Player[]>([])
-
-  useEffect(()=>{
-    setPlayerInfo(playerRepository.fetchPlayerInfo())
-  },[])
-
-  const options = playerInfo?.map((item:Player, index:number)=>{
+  const options = items?.map((item:Player, index:number)=>{
     return <option key={`${index}-player`} data-testid={item.name} value={item.name} />
   })
 
   return (
     <div data-testid='pullDownList' className={styles.pullDownContainer}>
       <label>Players List</label>
-      <input data-testid='listInput' type={type} list={list} />
-        <datalist data-testid='datalist' id={id} >
+      <input data-testid='listInput' type={type} list={tagName} />
+        <datalist data-testid='datalist' id={tagName} >
           {options}
         </datalist>
     </div>

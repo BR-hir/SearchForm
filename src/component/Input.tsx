@@ -2,7 +2,7 @@ import styles from './Input.module.scss';
 
 type Props = {
   id?:string
-  title?:string
+  title:string
   htmlFor?:string
   type: string
   placeholder: string
@@ -25,6 +25,7 @@ function Input(props:Props){
 }
 
 Input.defaultProps = {
+  title:'Please add Text',
   type:'text',
   placeholder: '回答を入力'
 }
