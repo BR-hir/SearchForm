@@ -30,4 +30,8 @@ describe('SearchView',()=>{
   it('should see the pullDownList',()=>{
     expect(screen.getByTestId('pullDownList')).toBeInTheDocument();
   })
+
+  it('should see the radioButton',()=>{
+    expect(screen.getByTestId('radioButton')).toBeInTheDocument();
+  })
 })

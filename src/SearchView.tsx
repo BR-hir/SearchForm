@@ -18,12 +18,10 @@ export function SearchView() {
   return (
     <div data-testid='searchPage' className={styles.searchViewContainer}>
       <Header />
-      <Input />
+      <Input maxLength={15}/>
       <NumberInput  labelText='Please enter a numerical value' decimalPoint={3}/>
       <PullDown type='text'  tagName='playerList' items={players}/>
       <RadioButton options={[{label:'ラベル1',value:'lavel1'},{label:'ラベル2',value:'lavel2'}]} />
-      <RadioButton options={[{label:'ラベル1',value:'lavel3'},{label:'ラベル2',value:'lavel4'}]} isMultiSelect={true}/>
     </div>
-
   )
 }

@@ -9,32 +9,23 @@ type Props = {
 
 function NumberInput(props:Props){
   const { placeholder,labelText, decimalPoint }= props
-  const [noValue,setNoValue] = useState('')
+  const [numberValue,setNumberValue] = useState('')
 
-  const fixedNumber=( value:string )=>{
-    let numbers = String(value).split('.');
-    const digitNumber = (numbers[1] ? numbers[1].length : 0)
-    if (digitNumber <= decimalPoint){
-      setNoValue(value)
-    }
-  }
 
   const fillNumber = () => {
-    let numbers = String(noValue).split('.');
+    let numbers = String(numberValue).split('.');
+
     const digitNumber = (numbers[1] ? numbers[1].length : 0)
-    if (digitNumber < decimalPoint){
-      setNoValue(Number(noValue).toFixed(decimalPoint))
-    }
-    if (!digitNumber){
-      setNoValue('')
+    if (digitNumber !== decimalPoint){
+      setNumberValue(Number(numberValue).toFixed(decimalPoint))
     }
   }
 
   return(
     <div data-testid='numberInputElement' className={styles.numberInputContainer}>
       <label>{labelText}</label>
-      <input type='number' placeholder={placeholder} value={noValue} onChange={(e)=>{
-        fixedNumber(e.target.value)
+      <input type='number' placeholder={placeholder} value={numberValue} onChange={(e)=>{
+        setNumberValue(e.target.value)
       }
       } onBlur={()=>{
         fillNumber()
