@@ -1,6 +1,5 @@
-import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import userEvent from '@testing-library/user-event'
+import { render, screen } from '@testing-library/react'
 import { Radio } from '../models/Radio'
 import RadioDouble from '../testDouble/RadioDouble'
 import RadioButton from './RadioButton'

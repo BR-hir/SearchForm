@@ -19,7 +19,7 @@ export function SearchView() {
     <div data-testid='searchPage' className={styles.searchViewContainer}>
       <Header />
       <Input maxLength={15}/>
-      <NumberInput  labelText='Please enter a numerical value' decimalPoint={3}/>
+      <NumberInput  labelText='Please enter a numerical value' decimalPoint={3} maximumValue={30} />
       <PullDown type='text'  tagName='playerList' items={players}/>
       <RadioButton options={[{label:'ラベル1',value:'lavel1'},{label:'ラベル2',value:'lavel2'}]} />
     </div>

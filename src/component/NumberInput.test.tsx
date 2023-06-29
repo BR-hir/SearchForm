@@ -3,10 +3,12 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import NumberInput from './NumberInput'
 
+const maximumValue = 30
+
 describe('Number Input',()=>{
   beforeEach(()=>{
     render(
-      <NumberInput  placeholder='testPlacehplder' labelText='testLabelText' decimalPoint={2} />
+      <NumberInput  placeholder='testPlacehplder' labelText='testLabelText' decimalPoint={2} maximumValue={maximumValue} />
     )
   })
 
@@ -19,26 +21,29 @@ describe('Number Input',()=>{
   })
 
   xit('A specified number of digits can be displayed after the decimal point',async () => {
-    // given
     const inputElement = screen.getByPlaceholderText('testPlacehplder')
 
-    // when
     userEvent.type(inputElement, '12.111111')
+    userEvent.tab()
 
-    // then
-    expect(inputElement).toHaveValue('12.1')
+    expect(inputElement.value).toBe('12.11')
   })
 
   xit('Input is fill in zero',async () => {
-    // given
     const inputElement = screen.getByPlaceholderText('testPlacehplder')
 
-    // when
     userEvent.type(inputElement, '12')
-    console.log(inputElement)
     userEvent.tab()
 
-    // then
-    expect(inputElement).toHaveValue('12.0')
+    expect(inputElement.value).toBe('12.00')
+  })
+
+  it('Cannot enter numbers over 30',async () => {
+    const inputElement = screen.getByPlaceholderText('testPlacehplder')
+
+    userEvent.type(inputElement, '50')
+
+    expect(inputElement.value).toBe('30')
+    expect(screen.getByText(`Cannot enter a number greater than ${maximumValue}`))
   })
 })
