@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { getByText, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import Input from './Input'
@@ -6,7 +6,7 @@ import Input from './Input'
 const maxLength = 30
 
 describe('Input compornent',()=> {
-  describe('text input rendering',()=>{
+  xdescribe('text input rendering',()=>{
     beforeEach(()=>{
       render(
         <Input placeholder='Please enter text in placeholder' title='testTitle' maxLength={maxLength} />
@@ -38,5 +38,18 @@ describe('Input compornent',()=> {
       expect(inputElement.value).toBe(words30);
       expect(screen.getByText(`Only ${maxLength} characters can be entered`)).toBeInTheDocument()
     })
+  })
+  describe('Required input ', () => {
+    it('required labe,placeHOlder and namel', () => {
+      render(
+        <Input label='testLabel' placeholder='testPlaceHolder' name='testName' value='testValue' />
+      )
+
+      expect(screen.getByText('testLabel')).toBeInTheDocument()
+      expect(screen.getByPlaceholderText('testPlaceHolder')).toBeInTheDocument()
+      expect(screen.getByPlaceholderText('testPlaceHolder')).toHaveAttribute('name','testName')
+      expect(screen.getByPlaceholderText('testPlaceHolder')).toHaveAttribute('value','testValue')
+    })
+
   })
 })

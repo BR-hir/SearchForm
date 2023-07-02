@@ -1,47 +1,92 @@
-import { useState } from 'react'
-import styles from './Input.module.scss';
+import { FormEvent, FormEventHandler, useState } from 'react'
+import useError from './hooks/useError'
+import { ValidationError } from './validators/ValidationResult'
+import styles from './Input.module.scss'
+import InputFieldValidator from './validators/InputFieldValidator'
 
 type Props = {
-  id?:string
-  title:string
+  label:string
+  name:string
+  value:string
+  placeholder?: string
+  onChangeHandler:FormEventHandler<HTMLInputElement>,
   htmlFor?:string
   maxLength?:number
-  placeholder: string
+  minLength?:number
+  required?:boolean
+  errorCondition:()=>void
+  errorMsg:string
 }
 
 function Input(props:Props){
   const {
-    id,
-    title,
+    label,
+    name,
+    value,
+    placeholder,
+    onChangeHandler,
     htmlFor,
     maxLength,
-    placeholder } = props;
-  const [value,setValue] = useState('')
-  const [isValidationError,setIsValidationError] = useState(false)
+    minLength,
+    required,
+    errorCondition,
+    errorMsg
+  } = props;
 
-  const onChangeHandler = (value)=>{
-    if (value.length <= maxLength){
-      setValue(value)
-      setIsValidationError(false)
-    } else {
-      setIsValidationError(true)
+  const [invokeError,setInvokeError] = useState(false)
+  const [errorMessage,setErrorMessage] = useState('')
+  // const [isError,errorMessage]= useError(errorCondition,errorMsg)
+
+  const onInvalid= (event : FormEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    const target = event.target as HTMLInputElement
+    const validator = new InputFieldValidator(target.value,minLength,maxLength)
+    const result = validator.validate()
+    if (!result.success){
+      if (result.error === ValidationError.empty){
+        setErrorMessage('Answer is required.')
+      }
+      if (result.error === ValidationError.tooShort){
+        setErrorMessage(`Please enter at least ${minLength} characters`)
+      }
+      if (result.error === ValidationError.tooLong){
+        setErrorMessage(`Up to ${maxLength} characters`)
+      }
     }
+    setInvokeError(true)
+  }
+
+  const onBlur = (event : FormEvent<HTMLInputElement>)=>{
+    const target = event.target as HTMLInputElement
+    target.checkValidity()
+    // errorCondition()
+  }
+
+  const onFocus = () => {
+    setInvokeError(false)
   }
 
   return (
     <div data-testid='inputElement' className={styles.inputContainer}>
-      <label htmlFor={htmlFor} >{title}</label>
-      <input className={styles.textInput} value={value} placeholder={placeholder}  onChange={(e)=>{onChangeHandler(e.target.value)}} id={id}/>
-      {isValidationError && (
-       <div>{`Only ${maxLength} characters can be entered`}</div>
+      <label htmlFor={htmlFor} >{label}</label>
+      <input
+        className={styles.textInput}
+        name={name}
+        value={value}
+        onChange={onChangeHandler}
+        maxLength={maxLength}
+        minLength={minLength}
+        placeholder={placeholder}
+        onInvalid={onInvalid}
+        required={required}
+        onBlur={onBlur}
+        onFocus={onFocus}
+      />
+      {invokeError &&(
+        <p>{errorMessage}</p>
       )}
     </div>
   )
-}
-
-Input.defaultProps = {
-  title:'Please add Text',
-  placeholder: '回答を入力'
 }
 
 export default Input;
