@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { log } from 'util'
 import { Player } from './models/Player'
 import * as playerRepository from './repository/PlayerRepository'
 import Input from './component/Input'
@@ -25,6 +26,11 @@ export function SearchView() {
         }
         maxLength={15}
         minLength={10}
+        errorCondition={()=>{
+          console.log(inputValue === 14)
+          return inputValue === 14
+        }}
+        errorMsg='errrrrrorororororoo'
         required
       />
       {/*<NumberInput  labelText='Please enter a numerical value' decimalPoint={3} maximumValue={30} />*/}

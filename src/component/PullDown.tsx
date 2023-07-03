@@ -15,12 +15,13 @@ export default function PullDown(props:Props){
   })
 
   return (
-    <div data-testid='pullDownList' className={styles.pullDownContainer}>
+    <div 'data-testid='pullDownList'' className={styles.pullDownContainer}>
       <label>Players List</label>
-      <input data-testid='listInput' type={type} list={tagName} />
-        <datalist data-testid='datalist' id={tagName} >
+      <input 'data-testid='listInput'' type={type} list={tagName} />
+        {/*<datalist data-testid='datalist' id={tagName} >*/}
+          <div></div>
           {options}
-        </datalist>
+        {/*</datalist>*/}
     </div>
   )
 }
