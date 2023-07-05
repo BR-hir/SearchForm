@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { informationContext } from './component/contexts/InformationContextProvider'
 import PullDown from './component/PullDown'
-import { log } from 'util'
 import { SelectOption } from './models/SelectOption'
 import * as playerRepository from './repository/PlayerRepository'
 import Input from './component/Input'
 import styles from './SearchView.module.scss'
 
 export function SearchView() {
+  const { setIsError,setErrorMessage } = useContext(informationContext)!
   const [options,setOptions] = useState<SelectOption[]>([])
   const [inputValue,setInputValue] = useState('')
 
@@ -31,27 +32,33 @@ export function SearchView() {
   },[])
 
 
+  const moreChara = () => {
+    if (inputValue.length < 15){
+      setIsError(true)
+      setErrorMessage('15文字以上入力させてください')
+    }else{
+      setIsError(false)
+    }
+  }
+
   return (
     <div data-testid='searchPage' className={styles.searchViewContainer}>
       {/*<Header />*/}
-      {/*<Input*/}
-      {/*  value={inputValue}*/}
-      {/*  onChangeHandler={*/}
-      {/*    (event)=>{*/}
-      {/*      const target = event.target as HTMLInputElement*/}
-      {/*      setInputValue(target.value)*/}
-      {/*    }*/}
-      {/*  }*/}
-      {/*  maxLength={15}*/}
-      {/*  minLength={10}*/}
-      {/*  errorCondition={()=>{*/}
-      {/*    return true*/}
-      {/*  }}*/}
-      {/*  errorMsg='errrrrrorororororoo'*/}
-      {/*  required*/}
-      {/*/>*/}
-      {/*<NumberInput  labelText='Please enter a numerical value' decimalPoint={3} maximumValue={30} />*/}
+      <Input
+        value={inputValue}
+        onChangeHandler={
+          (event)=>{
+            const target = event.target as HTMLInputElement
+            setInputValue(target.value)
+          }
+        }
+        maxLength={20}
+        minLength={10}
+        errorConditions={[moreChara]}
+        required
+      />
       <PullDown placeholder='Please Chose' items={options}/>
+      {/*<NumberInput  labelText='Please enter a numerical value' decimalPoint={3} maximumValue={30} />*/}
       {/*<RadioButton options={[{label:'ラベル1',value:'lavel1'},{label:'ラベル2',value:'lavel2'}]} />*/}
     </div>
   )

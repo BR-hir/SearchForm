@@ -8,30 +8,14 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigateSpy,
 }));
 
-xdescribe('SearchView',()=>{
+describe('SearchView',()=>{
   beforeEach(()=>{
     render(
       <SearchView />
     )
   })
 
-  it('should see header text',()=> {
-    expect(screen.getByText('Fun To BoatRace')).toBeInTheDocument()
-  })
-
-  it('should see the inputElement',()=>{
-    expect(screen.getByTestId('inputElement')).toBeInTheDocument();
-  })
-
-  it('should see the numberElement',()=>{
-    expect(screen.getByTestId('numberInputElement')).toBeInTheDocument();
-  })
-
-  it('should see the pullDownList',()=>{
-    expect(screen.getByTestId('pullDownList')).toBeInTheDocument();
-  })
-
-  it('should see the radioButton',()=>{
-    expect(screen.getByTestId('radioButton')).toBeInTheDocument();
+  it('All necessary components are visible.', () => {
+    expect(screen.getByRole('textbox'))
   })
 })

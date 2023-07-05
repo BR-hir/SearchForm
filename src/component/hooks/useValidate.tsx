@@ -1,28 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useContext, } from 'react'
+import { informationContext } from '../contexts/InformationContextProvider'
 
-const useValidate = (condition?: (() => void), message?:string)=>{
-  const [isError,setIsError] = useState(false)
-  const [errorMessage,setErrorMessage] = useState('')
+const useValidate = (conditions?: (() => void)[])=>{
+  const { isError,setIsError,errorMessage } = useContext(informationContext)!
 
-  let errorJudge:boolean
-  useEffect(()=>{
-    console.log("123")
-    if (condition){
-      // condition.map((condition) => {
-        errorJudge = condition()
-        if (errorJudge && message){
-          setIsError(true)
-          setErrorMessage(message)
-        }else{
-          setIsError(false)
-          setErrorMessage('')
-        }
-      // })
-    }
+  conditions?.map((condition)=>{
+    condition()
+  })
 
-  },[])
-
-  return [isError,errorMessage]
+  return [isError,setIsError,errorMessage]
 }
 
 export default useValidate

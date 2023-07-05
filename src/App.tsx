@@ -1,14 +1,17 @@
 import { Route, Routes } from 'react-router-dom'
 import { SearchView } from './SearchView'
 import { TopView } from './TopView'
+import { InformationContextProvider } from '../src/component/contexts/InformationContextProvider'
 
 export function App() {
 
   return (
-    <Routes>
-      <Route path={'/'} element={<TopView />}></Route>
-      <Route path={'/search'} element={<SearchView />}></Route>
-    </Routes>
+    <InformationContextProvider>
+      <Routes>
+        <Route path={'/'} element={<TopView />}></Route>
+        <Route path={'/search'} element={<SearchView />}></Route>
+      </Routes>
+    </InformationContextProvider>
 
     )
 }
