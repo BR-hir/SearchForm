@@ -1,4 +1,4 @@
-import { FormEvent, FormEventHandler, useState } from 'react'
+import { FormEvent, FormEventHandler, useEffect, useState } from 'react'
 import useValidate from './hooks/useValidate'
 import styles from './Input.module.scss'
 import InputFieldValidator from './validators/InputFieldValidator'
@@ -14,9 +14,7 @@ type Props = {
   maxLength?:number
   minLength?:number
   required?:boolean
-  errorCondition:()=>boolean
-    // FormEventHandler<HTMLInputElement>
-  errorMsg?:string
+  errorCondition:()=>void
 }
 
 function Input(props:Props){
@@ -34,34 +32,13 @@ function Input(props:Props){
     errorMsg
   } = props;
 
-  // errorCondition()
   const [invokeError,setInvokeError] = useState(false)
-  // const [errorMessage,setErrorMessage] = useState('')
-  const [isError,errorMessage]= useValidate(errorCondition,errorMsg)
-  console.log(isError,errorMessage)
 
-  // const onInvalid= (event : FormEvent<HTMLInputElement>) => {
-  //   event.preventDefault()
-  //   const target = event.target as HTMLInputElement
-  //   const validator = new InputFieldValidator(target.value,minLength,maxLength)
-  //   const result = validator.validate()
-  //     if (result.error === ValidationError.empty){
-  //       setErrorMessage('Answer is required.')
-  //     }
-  //     if (result.error === ValidationError.tooShort){
-  //       setErrorMessage(`Please enter at least ${minLength} characters`)
-  //     }
-  //     if (result.error === ValidationError.tooLong){
-  //       setErrorMessage(`Up to ${maxLength} characters`)
-  //     }
-  //
-  //   setInvokeError(true)
-  // }
+  const [isError,errorMessage] = useValidate(errorCondition,errorMsg)
 
   const onBlur = (event : FormEvent<HTMLInputElement>)=>{
     const target = event.target as HTMLInputElement
     target.checkValidity()
-    // errorCondition()
   }
 
   const onFocus = () => {

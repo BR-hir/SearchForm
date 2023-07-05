@@ -1,4 +1,4 @@
-import PlayerDouble from '../testDouble/PlayerDouble'
+import PlayerDouble from 'src/testDouble/SelectOptionsDouble'
 import * as playerRepository from './PlayerRepository'
 import * as reader from '../json/reader'
 
