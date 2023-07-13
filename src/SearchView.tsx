@@ -1,3 +1,4 @@
+import { ValidatedInput } from 'component/hooks/withValidation'
 import { useContext, useEffect, useState } from 'react'
 import { informationContext } from './component/contexts/InformationContextProvider'
 import PullDown from './component/PullDown'
@@ -7,7 +8,7 @@ import Input from './component/Input'
 import styles from './SearchView.module.scss'
 
 export function SearchView() {
-  const { setIsError,setErrorMessage } = useContext(informationContext)!
+  // const { setIsError,setErrorMessage } = useContext(informationContext)!
   const [options,setOptions] = useState<SelectOption[]>([])
   const [inputValue,setInputValue] = useState('')
 
@@ -32,15 +33,6 @@ export function SearchView() {
   },[])
 
 
-  const moreChara = () => {
-    if (inputValue.length < 15){
-      setIsError(true)
-      setErrorMessage('15文字以上入力させてください')
-    }else{
-      setIsError(false)
-    }
-  }
-
   return (
     <div data-testid='searchPage' className={styles.searchViewContainer}>
       {/*<Header />*/}
@@ -54,12 +46,12 @@ export function SearchView() {
         }
         maxLength={20}
         minLength={10}
-        errorConditions={[moreChara]}
         required
       />
-      <PullDown placeholder='Please Chose' items={options}/>
+      {/*<PullDown placeholder='Please Chose' items={options}/>*/}
       {/*<NumberInput  labelText='Please enter a numerical value' decimalPoint={3} maximumValue={30} />*/}
       {/*<RadioButton options={[{label:'ラベル1',value:'lavel1'},{label:'ラベル2',value:'lavel2'}]} />*/}
     </div>
+    <ValidatedInput value={} onBlur={} onChange={} validaitons={[(value) => console.log(value)]}/>
   )
 }

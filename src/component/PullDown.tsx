@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Simulate } from 'react-dom/test-utils'
-import { SelectOption } from '../models/SelectOption'
+import { SelectOption } from 'models/SelectOption'
 import styles from './PullDown.module.scss';
-import click = Simulate.click
 
 type Props = {
   items:SelectOption[]
@@ -16,12 +14,7 @@ export default function PullDown(props:Props){
   const [inputValue,setInputValue] = useState('')
   const [selectValue,setSelectValue] = useState('')
 
-  useEffect(()=>{
-    const filteredArray = items?.filter(item => item.option.includes(inputValue));
-    console.log(filteredArray)
-  },[inputValue,isShowItems])
-
-  const options = items?.map((item:SelectOption, index:number)=>{
+  const options = items?.filter(item => item.option.includes(inputValue)).map((item:SelectOption, index:number)=>{
     return(
       <div onClick={(e)=>{
         const divElement = e.target as HTMLDivElement
@@ -35,20 +28,20 @@ export default function PullDown(props:Props){
       </div>
       )
   })
-  const onClickHandler=() => {
-    setIsShowItems(!isShowItems)
-  }
 
   return (
-    <div className={styles.pullDownContainer} >
+    <div data-testid='pulldown' className={styles.pullDownContainer} >
       <input
         className={styles.pullDownInput}
         value={selectValue}
         onChange={(e)=>{
           setInputValue(e.target.value)
         }}
+        onClick={()=>setIsShowItems(true)}
         placeholder={placeholder}
-        onClick={onClickHandler}
+        onBlur={()=>{
+          setIsShowItems(false)
+        }}
       />
       {isShowItems && (
         options

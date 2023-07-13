@@ -8,10 +8,6 @@ const SelectOptionsDouble: SelectOption[] = [
   {
     option:'testOption2',
     iconPass:'testIconPass2'
-  },
-  {
-    option:'testOption3',
-    iconPass:'testIconPass3'
   }
 ]
 

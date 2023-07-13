@@ -16,6 +16,7 @@ describe('SearchView',()=>{
   })
 
   it('All necessary components are visible.', () => {
-    expect(screen.getByRole('textbox'))
+    expect(screen.getByTestId('inputElement')).toBeInTheDocument()
+    expect(screen.getByTestId('pulldown')).toBeInTheDocument()
   })
 })

@@ -1,8 +1,6 @@
-import { FormEvent, FormEventHandler, useEffect, useState } from 'react'
-import useValidate from './hooks/useValidate'
+import withValidation from './hooks/withValidation'
+import { FormEventHandler, useEffect } from 'react'
 import styles from './Input.module.scss'
-import InputFieldValidator from './validators/InputFieldValidator'
-import { ValidationError } from './validators/ValidationResult'
 
 type Props = {
   label:string
@@ -14,7 +12,7 @@ type Props = {
   maxLength?:number
   minLength?:number
   required?:boolean
-  errorConditions:(()=>void)[]
+  validations?:{condition:()=>void,errorMessage:string}
 }
 
 function Input(props:Props){
@@ -28,10 +26,14 @@ function Input(props:Props){
     maxLength,
     minLength,
     required,
-    errorConditions,
+    validations,
   } = props;
-
-  const [isError,errorMessage] = useValidate(errorConditions)
+  // useEffect(()=>{
+    // ValidatedInputが最後に描画される
+    const ValidatedInput = withValidation(validations)(Input)
+  //   console.log(test)
+  //
+  // },[])
 
   return (
     <div data-testid='inputElement' className={styles.inputContainer}>
@@ -46,12 +48,13 @@ function Input(props:Props){
         placeholder={placeholder}
         required={required}
       />
-      {isError &&(
-        <p>{errorMessage}</p>
-      )}
+      <withValidation />
+      <ValidatedInput />
     </div>
   )
 }
+
+// export default withValidation(Input)
 
 
 Input.defaultProps = {
