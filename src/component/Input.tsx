@@ -1,18 +1,13 @@
-import withValidation from './hooks/withValidation'
-import { FormEventHandler, useEffect } from 'react'
+import { FormEventHandler } from 'react'
 import styles from './Input.module.scss'
 
 type Props = {
-  label:string
-  name:string
-  value:string
-  placeholder?: string
-  onChangeHandler:FormEventHandler<HTMLInputElement>,
-  htmlFor?:string
-  maxLength?:number
-  minLength?:number
-  required?:boolean
-  validations?:{condition:()=>void,errorMessage:string}
+  label?:string
+  value?:string
+  name?:string
+  onChange?:FormEventHandler<HTMLInputElement>,
+  onBlur:()=>void
+  maxLength:number
 }
 
 function Input(props:Props){
@@ -20,46 +15,27 @@ function Input(props:Props){
     label,
     name,
     value,
-    placeholder,
-    onChangeHandler,
-    htmlFor,
+    onChange,
+    onBlur,
     maxLength,
-    minLength,
-    required,
-    validations,
   } = props;
-  // useEffect(()=>{
-    // ValidatedInputが最後に描画される
-    const ValidatedInput = withValidation(validations)(Input)
-  //   console.log(test)
-  //
-  // },[])
+  console.log('props',onBlur)
+  console.log('InputOnChange',onChange)
+  console.log('maxLength',maxLength)
 
   return (
-    <div data-testid='inputElement' className={styles.inputContainer}>
-      <label htmlFor={htmlFor} >{label}</label>
+    <div className={styles.inputContainer}>
+      <label >{label}</label>
       <input
         className={styles.textInput}
         name={name}
         value={value}
-        onChange={onChangeHandler}
+        onChange={onChange}
+        onBlur={onBlur}
         maxLength={maxLength}
-        minLength={minLength}
-        placeholder={placeholder}
-        required={required}
       />
-      <withValidation />
-      <ValidatedInput />
     </div>
   )
-}
-
-// export default withValidation(Input)
-
-
-Input.defaultProps = {
-  errorCondition:()=>false,
-  errorMsg:''
 }
 
 export default Input;

@@ -1,18 +1,18 @@
-import Input from 'component/Input'
-import { forwardRef, useCallback, useState } from 'react'
+import { ComponentType, forwardRef, useState } from 'react'
+import Input from '../../component/Input'
 
-type conditions = {
-  condition?: () => void
-  errorMessage?: string
+type ElementRef = HTMLElement
+type Props = {
+  validations?:([()=>void])
+  onBlur?:()=>void
 }
 
-
-const withValidation = ({ WrappedComponent }) => forwardRef((props, ref) => {
+const withValidation = (WrappedComponent:ComponentType<Props>):ComponentType<Props> => forwardRef<ElementRef, Props>((props, ref) => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const validate = () => {
     try{
-      props.validations.forEach(validation => validation())
+      props.validations?.forEach(validation => validation())
     } catch (e) {
       setErrorMessage(e.message)
     }
@@ -22,20 +22,15 @@ const withValidation = ({ WrappedComponent }) => forwardRef((props, ref) => {
       props.onBlur && props.onBlur()
       validate()
   }
-
   const newProps = { ...props, onBlur }
-  return <div>
-    <WrappedComponent {...newProps} />
-    {errorMessage && <div>{errorMessage}</div>}
-  </div>
-}
+  return (
+    <div>
+      <WrappedComponent {...newProps} />
+      {errorMessage && <div>{errorMessage}</div>}
+    </div>
+    )
 
-// const withValidation = (Element,Children)=> {
-//   return props => {
-//     const [error,setError] = useState()
-//     return <Element {...props} setError={setError} error={error}>{Children}</Element>
-//   }
-// }
+})
 
 export default withValidation
 
