@@ -1,3 +1,4 @@
+import NumberInput from '../../component/NumberInput'
 import { ComponentType, forwardRef, useState } from 'react'
 import Input from '../../component/Input'
 
@@ -35,3 +36,4 @@ const withValidation = (WrappedComponent:ComponentType<Props>):ComponentType<Pro
 export default withValidation
 
 export const ValidatedInput = withValidation(Input)
+export const ValidatedNumberInput = withValidation(NumberInput)

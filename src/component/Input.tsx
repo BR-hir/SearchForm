@@ -19,9 +19,6 @@ function Input(props:Props){
     onBlur,
     maxLength,
   } = props;
-  console.log('props',onBlur)
-  console.log('InputOnChange',onChange)
-  console.log('maxLength',maxLength)
 
   return (
     <div className={styles.inputContainer}>

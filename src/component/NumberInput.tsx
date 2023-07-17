@@ -1,67 +1,36 @@
-import { useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 import styles from './NumberInput.module.scss';
 
 type Props = {
-  placeholder?:string
-  labelText:string
-  maximumValue:string
-  decimalPoint:number
+  label?:string
+  value?:string
+  name?:string
+  onChange?:FormEventHandler<HTMLInputElement>,
+  onBlur:()=>void
 }
 
 function NumberInput(props:Props){
-  const { placeholder,labelText, maximumValue, decimalPoint }= props
-  const [value,setValue] = useState('')
-  const [isError,setIsError] = useState(false)
-
-  const onChangeHandler = (value)=>{
-    if (maximumValue >= value){
-      setValue(value)
-      setIsError(false)
-      return
-    }
-    if (maximumValue){
-      setValue(maximumValue)
-      setIsError(true)
-    }
-  }
-
-  const onBlurHandler = () => {
-    let numbers = String(value).split('.');
-    const digitNumber = (numbers[1] ? numbers[1].length : 0)
-    if (!value){
-      setValue('')
-      return
-    }
-
-    if(digitNumber !== decimalPoint){
-      setValue(Number(value).toFixed(decimalPoint))
-    }
-  }
+  const {
+    label,
+    value,
+    name,
+    onChange,
+    onBlur,
+  }=props
 
   return(
-    <div data-testid='numberInputElement' className={styles.numberInputContainer}>
-      <label>{labelText}</label>
+    <div data-testid='numberInputElement' className={styles.numberInputContainer} >
+      <label>{label}</label>
       <input
         type='number'
-        placeholder={placeholder}
+        name={name}
         value={value}
-        onChange={(e)=>{
-          onChangeHandler(e.target.value)
-        }}
-        onBlur={()=>{
-          onBlurHandler()
-        }}
+        onChange={onChange}
+        onBlur={onBlur}
       />
-      {isError && (
-        <div>{`Cannot enter a number greater than ${maximumValue}`}</div>
-      )}
     </div>
   )
 }
 
-NumberInput.defaultProps = {
-  type:'text',
-  placeholder: '回答を入力'
-}
 
 export default NumberInput;

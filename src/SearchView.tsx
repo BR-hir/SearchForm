@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { ValidatedInput } from './component/hooks/withValidation'
+import { ValidatedInput, ValidatedNumberInput } from './component/hooks/withValidation'
 import { SelectOption } from './models/SelectOption'
 import styles from './SearchView.module.scss'
 
 export function SearchView() {
   const [options,setOptions] = useState<SelectOption[]>([])
   const [inputValue,setInputValue] = useState('')
+  const [numberInputValue,setNumberInputValue] = useState('')
 
   useEffect(()=>{
     setOptions([{
@@ -34,7 +35,6 @@ export function SearchView() {
         name='input'
         label='please text'
         value={inputValue}
-        onBlur={()=>{}}
         onChange={(event)=>{
           const target = event.target as HTMLInputElement
           setInputValue(target.value)
@@ -42,7 +42,16 @@ export function SearchView() {
         validaitons={[() => console.log('11')]}
         maxLength={10}
         />
-      {/*<ValidationInput2 label='label'/>*/}
+      <ValidatedNumberInput
+        name='number input'
+        label='please number'
+        value={numberInputValue}
+        onChange={(event)=>{
+          const target = event.target as HTMLInputElement
+          setNumberInputValue(target.value)
+        }}
+        validaitons={[() => console.log('11')]}
+        />
     </div>
   )
 }
