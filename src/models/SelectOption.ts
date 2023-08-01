@@ -1,5 +1,5 @@
 
 export type SelectOption = Readonly<{
-  option:string
+  option:string // any
   iconPass?:string
 }>

@@ -1,3 +1,4 @@
+import React from 'react'
 import { FormEventHandler } from 'react'
 import styles from './Input.module.scss'
 
@@ -6,8 +7,8 @@ type Props = {
   value?:string
   name?:string
   onChange?:FormEventHandler<HTMLInputElement>,
-  onBlur:()=>void
-  maxLength:number
+  onBlur?:()=>void
+  required?:boolean
 }
 
 function Input(props:Props){
@@ -17,7 +18,7 @@ function Input(props:Props){
     value,
     onChange,
     onBlur,
-    maxLength,
+    required,
   } = props;
 
   return (
@@ -29,7 +30,7 @@ function Input(props:Props){
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        maxLength={maxLength}
+        required={required}
       />
     </div>
   )

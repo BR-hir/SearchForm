@@ -1,3 +1,4 @@
+import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -9,13 +10,11 @@ jest.mock('../repository/PlayerRepository')
 describe('Drop down compornent',()=>{
   beforeEach(()=>{
     render(
-      <PullDown items={SelectOptionsDouble}　placeholder='testPlaceholder'/>
+      <PullDown items={SelectOptionsDouble}/>
     )
   })
 
   it('Necessary elements should be visible when rendered.', () => {
-    expect(screen.getByPlaceholderText('testPlaceholder')).toBeInTheDocument()
-
     expect(screen.queryByText('testOption1')).not.toBeInTheDocument()
     expect(screen.queryByText('testOption2')).not.toBeInTheDocument()
      expect(screen.queryByAltText('testOption1')).not.toBeInTheDocument()
@@ -23,7 +22,7 @@ describe('Drop down compornent',()=>{
   })
 
   it('Click on an input element to see its name and image.', async () => {
-    const inputElement = screen.getByPlaceholderText('testPlaceholder');
+    const inputElement = screen.getByRole('textbox');
 
     await userEvent.click(inputElement)
 
@@ -34,35 +33,35 @@ describe('Drop down compornent',()=>{
   })
 
   it('Selection disappears when deactivated', async () => {
-    const inputElement = screen.getByPlaceholderText('testPlaceholder');
+    const inputElement = screen.getByRole('textbox');
 
     await userEvent.click(inputElement)
-    await userEvent.tab()
+    const outsideElement = document.createElement('div');
+    document.body.appendChild(outsideElement);
+    await userEvent.click(outsideElement);
 
     await waitFor(() =>expect(screen.queryByText('testOption1')).not.toBeInTheDocument())
     await waitFor(() =>expect(screen.queryByText('testOption2')).not.toBeInTheDocument())
     await waitFor(() => expect(screen.queryByAltText('testOption1')).not.toBeInTheDocument())
     await waitFor(() => expect(screen.queryByAltText('testOption2')).not.toBeInTheDocument())
   })
-  xit('Clicking on an option does not delete the selection.', async () => {
-    const inputElement = screen.getByPlaceholderText('testPlaceholder');
+  it('Clicking on an option does not delete the selection.', async () => {
+    const inputElement = screen.getByRole('textbox');
 
     await userEvent.click(inputElement)
-    await userEvent.click(screen.queryByText('testOption1'))
+    await userEvent.click(screen.getByText('testOption1'))
 
     await waitFor(() =>expect(screen.queryByText('testOption1')).toBeInTheDocument())
     await waitFor(() =>expect(screen.queryByText('testOption2')).toBeInTheDocument())
-    await waitFor(() => expect(screen.queryByAltText('testOption1')).toBeInTheDocument())
-    await waitFor(() => expect(screen.queryByAltText('testOption2')).toBeInTheDocument())
   })
 
   it('Sorted by entered value', async () => {
-    const inputElement = screen.getByPlaceholderText('testPlaceholder');
+    const inputElement = screen.getByRole('textbox');
 
     await userEvent.type(inputElement,'1')
 
-    await waitFor(() =>expect(screen.getByText('testOption1')).toBeInTheDocument())
-    await waitFor(() =>expect(screen.queryByText('testOption2')).not.toBeInTheDocument())
+    await waitFor(() => expect(screen.getByText('testOption1')).toBeInTheDocument())
+    await waitFor(() => expect(screen.queryByText('testOption2')).not.toBeInTheDocument())
     await waitFor(() => expect(screen.getByAltText('testOption1')).toBeInTheDocument())
     await waitFor(() => expect(screen.queryByAltText('testOption2')).not.toBeInTheDocument())
   })

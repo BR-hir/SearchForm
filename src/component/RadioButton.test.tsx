@@ -1,3 +1,4 @@
+import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { Radio } from '../models/Radio'
@@ -5,7 +6,7 @@ import RadioDouble from '../testDouble/RadioDouble'
 import RadioButton from './RadioButton'
 
 describe('Radio Button', ()=>{
-  const renderRadioButtonComponent = (option:Radio[],isMultiSelect?:Boolean)=>{
+  const renderRadioButtonComponent = (option:Radio[],isMultiSelect?:boolean)=>{
     render(
       <RadioButton options={option} isMultiSelect={isMultiSelect}/>
     )

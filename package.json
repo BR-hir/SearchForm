@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint --fix 'src/**/*.ts' 'src/**/*.tsx'",
     "preview": "vite preview",
     "test": "react-scripts test --watchAll=false"
   },
@@ -18,13 +18,14 @@
     "@types/react-dom": "^17.0.11",
     "@types/sinon": "^10.0.8",
     "@vitejs/plugin-react": "^4.0.0",
-    "classnames": "^2.3.1",
+    "classnames": "^2.3.2",
     "date-fns": "^2.28.0",
     "exceljs": "^4.3.0",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.45.1",
     "react-router-dom": "6",
     "react-scripts": "5.0.0",
     "react-select": "^5.7.3",
@@ -43,18 +44,25 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/lodash": "^4.14.182",
     "@types/react-beautiful-dnd": "^13.1.2",
-    "@typescript-eslint/parser": "^5.10.1",
-    "eslint": "^8.34.0",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "^8.46.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^7.0.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.3",
     "jest-mock": "^27.5.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint . --ext .ts,.tsx"
+    }
   }
 }

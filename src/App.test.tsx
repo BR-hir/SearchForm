@@ -1,8 +1,10 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils'
 import '@testing-library/jest-dom'
 import {App} from './App'
 import { MemoryRouter } from 'react-router-dom';
+
 
 const renderApplication=async (url:string)=>{
 

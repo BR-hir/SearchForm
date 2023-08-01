@@ -4,12 +4,23 @@
 .pullDownContainer{
   display: flex;
   flex-direction: column;
-  //gap: 10px;
-  width: 400px;
+}
+.inputContainer {
+  border: solid 1px black;
+
+  input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
 }
 
 .pullDownInput {
   height: 50px;
+}
+
+.option {
+
 }
 
 .optionContainer {
@@ -20,11 +31,15 @@
   padding: 2px 0;
 
   &:hover{
-    background-color: red;
+    background: rgba(0,0,0,.03);
+    color: rgba(0,0,0,.95)
   }
 }
 
 .icon {
   width: 25px;
   height: 25px;
+}
+.test{
+  background-color: black;
 }

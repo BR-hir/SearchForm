@@ -1,5 +1,5 @@
-import { FormEventHandler, useState } from 'react'
-import styles from './NumberInput.module.scss';
+import React, { FormEventHandler } from 'react'
+import styles from './NumberInput.module.scss'
 
 type Props = {
   label?:string
@@ -19,7 +19,7 @@ function NumberInput(props:Props){
   }=props
 
   return(
-    <div data-testid='numberInputElement' className={styles.numberInputContainer} >
+    <div className={styles.numberInputContainer} >
       <label>{label}</label>
       <input
         type='number'
