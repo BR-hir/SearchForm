@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event'
 import SelectOptionsDouble from '../testDouble/SelectOptionsDouble'
 import PullDown from './PullDown'
 
-jest.mock('../repository/PlayerRepository')
 
 describe('Drop down compornent',()=>{
   beforeEach(()=>{
@@ -51,8 +50,9 @@ describe('Drop down compornent',()=>{
     await userEvent.click(inputElement)
     await userEvent.click(screen.getByText('testOption1'))
 
-    await waitFor(() =>expect(screen.queryByText('testOption1')).toBeInTheDocument())
-    await waitFor(() =>expect(screen.queryByText('testOption2')).toBeInTheDocument())
+    screen.debug()
+    await waitFor(() =>expect(screen.getByText('testOption1')).toBeInTheDocument())
+    await waitFor(() =>expect(screen.getByText('testOption2')).toBeInTheDocument())
   })
 
   it('Sorted by entered value', async () => {
@@ -65,5 +65,6 @@ describe('Drop down compornent',()=>{
     await waitFor(() => expect(screen.getByAltText('testOption1')).toBeInTheDocument())
     await waitFor(() => expect(screen.queryByAltText('testOption2')).not.toBeInTheDocument())
   })
+
 
 })

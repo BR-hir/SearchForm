@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint --fix 'src/**/*.ts' 'src/**/*.tsx'",
     "preview": "vite preview",
-    "test": "react-scripts test --watchAll=false"
+    "test": "react-scripts test --watchAll=false",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@types/gtag.js": "^0.0.12",
@@ -55,9 +56,15 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "latest",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.3",
     "jest-mock": "^27.5.0",
     "lint-staged": "^13.2.3",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }

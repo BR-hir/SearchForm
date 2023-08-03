@@ -19,16 +19,22 @@
   height: 50px;
 }
 
-.option {
-
-}
-
 .optionContainer {
   display: flex;
   width: 100%;
   height: 100%;
   gap: 10px;
   padding: 2px 0;
+
+
+  .selectOption{
+    background: red;
+  }
+
+  .unSelectOption{
+    background: rgba(0,0,0,.03);
+    background: red;
+  }
 
   &:hover{
     background: rgba(0,0,0,.03);

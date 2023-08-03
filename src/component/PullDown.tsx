@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { useRef } from 'react'
 import { SelectOption } from 'models/SelectOption'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -52,13 +53,18 @@ export default function PullDown(props: Props) {
       !selectValues.includes(item.option)).map((item: SelectOption, index: number) => {
       return (
         <div
-          className={styles.optionContainer}
+          // className={styles.optionContainer}
+          className={classNames(styles.optionContainer,{
+            [styles.selectOption]:index === currentIndex,
+            [styles.unSelectOption]:index !== currentIndex,
+          })}     // 効かない
           tabIndex={0}
-          onClick={() => {
+          onClick={(e) => {
             setInputValue('')
             selectedValues(index)
+            e.stopPropagation();
           }}
-          style={{ backgroundColor: index === currentIndex ? 'lightblue' : 'white', }}  //classNamesを使って実装する
+          // style={{ backgroundColor: index === currentIndex ? 'lightblue' : 'white', }}  //classNamesを使って実装する
           key={`${index}`}
         >
           <img className={styles.icon} src={item.iconPass} alt={item.option}/>
@@ -67,7 +73,7 @@ export default function PullDown(props: Props) {
       )
     })
     setFilteredOptions(_filteredOptions)
-  }, [items, selectValues, inputValue, selectedValues])
+  }, [items, selectValues , inputValue, selectedValues])
 
   const keyDown = (event) => {
     console.log(event.key)
@@ -97,7 +103,7 @@ export default function PullDown(props: Props) {
     }
   }
   // api使ってサーバーから結果をもらう
-  // 準備ができなかスピナー
+  // 準備ができなかった時にスピナー
 
   return (
     <div
@@ -106,7 +112,10 @@ export default function PullDown(props: Props) {
       ref={pullDownRef}
     >
       <div className={styles.inputContainer}
-           onClick={() => setIsShowOptions(true)}
+           onClick={(e) =>{
+             e.stopPropagation();
+             setIsShowOptions(true)
+           }}
       >
         {selectValues.length > 0 && <span>{selectValues}</span>}
         <input
@@ -121,11 +130,9 @@ export default function PullDown(props: Props) {
           }}
         />
       </div>
-      <div className={styles.option}>{isShowOptions && filteredOptions}</div>
+      <div >{isShowOptions && filteredOptions}</div>
     </div>
   )
 }
 
-//test
-// auto lint setting
-// use husky
+// auto lint setting use husky

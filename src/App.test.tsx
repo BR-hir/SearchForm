@@ -2,9 +2,14 @@ import React from 'react'
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils'
 import '@testing-library/jest-dom'
-import {App} from './App'
+import { SearchView } from 'SearchView'
+import { TopView } from 'TopView'
+import App from './App'
 import { MemoryRouter } from 'react-router-dom';
+import mocked = jest.mocked
 
+jest.mock('./SearchView')
+jest.mock('./TopView')
 
 const renderApplication=async (url:string)=>{
 
@@ -18,13 +23,17 @@ const renderApplication=async (url:string)=>{
 }
 
 describe('App Routing',()=>{
+  beforeEach(()=>{
+    mocked(TopView).mockImplementation(() => <div data-testid="topView" />)
+    mocked(SearchView).mockImplementation(() => <div data-testid="searchView" />)
+  })
   it('TopView is displayed when / is accessed.', async () => {
     // when
     await renderApplication('/');
 
     // given
     expect(
-      screen.getByTestId('topViewPage')
+      screen.getByTestId('topView')
     ).toBeInTheDocument();
   });
 
@@ -34,7 +43,7 @@ describe('App Routing',()=>{
 
     // given
     expect(
-      screen.getByTestId('searchPage')
+      screen.getByTestId('searchView')
     ).toBeInTheDocument();
   });
 })
